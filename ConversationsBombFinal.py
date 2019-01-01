@@ -16,20 +16,20 @@ def get_links(url):
     r = requests.get(url, headers=HEADERS)
     return r.headers
 
-
-def get_next(x):
-    i = 0
-    links = x['link']
-    if "next" in links:
-        gimme = links.split(',')
-        while i < len(gimme):
-            check = gimme[i].split(';')
-            if "next" in check[1]:
-                new_url = check[0].strip('<>')
+def get_next(response_headers):
+    CURRENT_LINK = 0
+    NEXT_LINK = 1
+    
+    unparsed_links = response_headers['link']
+    
+    if "next" in unparsed_links:
+        links = unparsed_links.split(',')
+        for link in links:
+            check = link.split(';')
+            if "next" in check[NEXT_LINK]:
+                new_url = check[CURRENT_LINK].strip('<>')
                 print(new_url)
                 break
-            else:
-                i += 1
         return new_url
     else:
         return url
