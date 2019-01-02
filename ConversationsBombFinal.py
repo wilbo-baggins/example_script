@@ -16,12 +16,12 @@ def get_links(url):
     r = requests.get(url, headers=HEADERS)
     return r.headers
 
-def get_next(response_headers):
+def get_next_link(response_headers):
     CURRENT_LINK = 0
     NEXT_LINK = 1
     
     unparsed_links = response_headers['link']
-    
+
     if "next" in unparsed_links:
         links = unparsed_links.split(',')
         for link in links:
@@ -41,7 +41,7 @@ while True:
     r = requests.get(url, headers=headers)
     data = json.loads(r.text)
     links = get_links(url)
-    check = get_next(links)
+    check = get_next_link(links)
     i = 0
     for each in data:
         beans = data[i]['subject']
