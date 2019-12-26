@@ -38,7 +38,7 @@ def get_next_link(response_headers):
 # this finds all the IDs for the messages we'll delete and adds them to a list
 while True:
     print(url)
-    r = requests.get(url, headers=headers)
+    r = requests.get(url, headers=HEADERS)
     data = json.loads(r.text)
     links = get_links(url)
     check = get_next_link(links)
@@ -64,7 +64,7 @@ while True:
 j = 0
 for each in messages:
     url = "https://"+domain+"/api/v1/conversations/"+str(messages[j])+"/delete_for_all"
-    r = requests.delete(url, headers=headers)
+    r = requests.delete(url, headers=HEADERS)
     print(messages[j], r.status_code)
     j += 1
 
