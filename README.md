@@ -1,1 +1,1 @@
-# portfolio
+This script scours a Canvas user's inbox looking for messages with a specific subject line.  It then deletes matching messages, both for the selected user and all users to whom the messages were sent.
